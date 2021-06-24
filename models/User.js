@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const userSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     profileImg: {
         type: String
@@ -9,4 +9,4 @@ const userSchema = new mongoose.Schema({
     collection: 'images'
 })
 
-module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model('User', UserSchema)
