@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
         type: String
     }
 }, {
-    collection: 'users'
+    collection: 'images'
 })
 
 module.exports = mongoose.model('User', userSchema)
