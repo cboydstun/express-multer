@@ -5,8 +5,6 @@ const UserSchema = new mongoose.Schema({
     profileImg: {
         type: String
     }
-}, {
-    collection: 'images'
-})
+}, {collection: 'images', timestamps: true})
 
 module.exports = mongoose.model('User', UserSchema)

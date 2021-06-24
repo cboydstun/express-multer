@@ -17,7 +17,7 @@ app.use(cors());
 app.use(morgan(':method :url :response-time'))
 
 //initialize server port
-const PORT = 4000;
+const PORT = 5001;
 
 // MongoDB Configuration
 mongoose.Promise = global.Promise;
