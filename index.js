@@ -1,38 +1,42 @@
+//import dependencies
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const dbConfig = require('./database/db');
 
-const api = require('./routes/upload')
+//initialize express
+const app = express();
+
+//initalize middleware
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+app.use(cors());
+
+//initialize server port
+const PORT = 4000;
 
 // MongoDB Configuration
 mongoose.Promise = global.Promise;
-mongoose.connect(dbConfig.db, {
-    useNewUrlParser: true
-}).then(() => {
-    console.log('Database sucessfully connected')
-},
-    error => {
-        console.log('Database could not be connected: ' + error)
-    }
-)
+mongoose.connect('mongodb://localhost:27017/react-fileupload-db', {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true,
+})
+.then(() => console.log('Database sucessfully connected'))
+.catch(err => console.log('Database could not be connected: ' + err))
 
-const app = express();
-app.use(express.json());
-app.use(express.urlencoded({
-    extended: false
-}));
-app.use(cors());
-
+//public image directory for uploads
 app.use('/public', express.static('public'));
 
+//declare routes
+const api = require('./routes/upload')
 app.use('/api', api)
 
-const port = process.env.PORT || 4000;
-const server = app.listen(port, () => {
-    console.log('Connected to port ' + port)
-})
+//server port is listening
+app.listen(PORT, () => {console.log('Connected to port ' + PORT)})
 
+
+//error handling
 app.use((req, res, next) => {
     // Error goes via `next()` method
     setImmediate(() => {

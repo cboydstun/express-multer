@@ -6,8 +6,6 @@ let express = require('express'),
 
 const DIR = './public/';
 
-console.log(uuidv4());
-
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, DIR);
